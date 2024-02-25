@@ -1,0 +1,6 @@
+SELECT o.ANIMAL_ID, o.NAME
+FROM ANIMAL_INS i, ANIMAL_OUTS o
+WHERE i.ANIMAL_ID = o.ANIMAL_ID 
+AND o.datetime - i.datetime > 0
+ORDER BY o.datetime - i.datetime DESC
+FETCH FIRST 2 ROWS ONLY
