@@ -1,0 +1,15 @@
+SELECT 
+    u.USER_ID, 
+    u.NICKNAME, 
+    (u.City || ' ' || u.STREET_ADDRESS1 || ' ' || u.STREET_ADDRESS2) 전체주소, 
+    (SUBSTR(TLNO, 0, 3) || '-' || SUBSTR(TLNO, 4, 4) || '-' || SUBSTR(TLNO, 8, 4)) 전화번호
+FROM USED_GOODS_USER u
+JOIN 
+(
+    SELECT COUNT(WRITER_ID), WRITER_ID
+    FROM USED_GOODS_BOARD
+    GROUP BY WRITER_ID
+    HAVING COUNT(WRITER_ID) >= 3
+) b 
+ON b.WRITER_ID = u.USER_ID
+ORDER BY 1 DESC;
